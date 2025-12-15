@@ -14,19 +14,18 @@ function TodoItem({ todo, onToggle, onDelete, onEdit, isEditingItem }) {
           className="toggle"
           type="checkbox"
           checked={todo.completed}
-          onChange={() => onToggle(todo.id)}
+          onChange={onToggle}
         />
-        {/* Chỉ gọi hàm onEdit, App sẽ lo phần còn lại */}
         <label onDoubleClick={() => onEdit(todo)}>
             {todo.text}
         </label>
         <button
           className="destroy"
-          onClick={() => onDelete(todo.id)}
+          onClick={onDelete}
         ></button>
       </div>
     </li>
   );
 }
 
-export default memo(TodoItem);
+export default TodoItem;

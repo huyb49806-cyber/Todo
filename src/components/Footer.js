@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Pagination from './Pagination';
+// import Pagination from './Pagination';
 
 function TodoFooter({ 
   activeCount, 
@@ -7,9 +7,9 @@ function TodoFooter({
   filter, 
   onFilterChange, 
   onClearCompleted,
-  page,
-  totalPages,
-  onPageChange
+  // page,
+  // totalPages,
+  // onPageChange
 }) {
   
   return (
@@ -39,11 +39,11 @@ function TodoFooter({
         </li>
       </ul>
       
-      <Pagination 
+      {/* <Pagination 
         page={page} 
         totalPages={totalPages} 
         onPageChange={onPageChange} 
-      />
+      /> */}
 
       <div style={{ minWidth: '100px', textAlign: 'right' }}>
         {completedCount > 0 && (

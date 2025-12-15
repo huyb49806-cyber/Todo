@@ -39,11 +39,12 @@ h1 {
   border-bottom: 1px solid #ededed;
 }
 
-/* Cần thêm .main để bọc ul */
 .main {
   position: relative;
   z-index: 2;
-  border-top: 1px solid #e6e6e6;
+}
+.main-scroll-container {
+  border-top: 1px solid #e6e6e6; 
 }
 
 .todo-list {
@@ -261,4 +262,30 @@ h1 {
   font-size: 12px;
   color: #555;
   margin: 0 5px;
+}
+
+.todoapp.theme-dark {
+    background: #282c34; /* Màu nền tối */
+    color: #e0e0e0; /* Màu chữ sáng */
+}
+.todoapp.theme-dark .new-todo {
+    background: #3a3f4b;
+    color: #e0e0e0;
+    border-bottom-color: #555;
+}
+.todoapp.theme-dark .todo-list li {
+    border-bottom-color: #555;
+}
+.todoapp.theme-dark .todo-list li.completed label {
+    color: #888;
+}
+.todoapp.theme-dark .footer {
+    border-top-color: #555;
+}
+.todoapp.theme-dark .filters button {
+    color: #aaa;
+}
+.todoapp.theme-dark .filters .selected {
+    border-color: #e0e0e0;
+    color: #e0e0e0;
 }
