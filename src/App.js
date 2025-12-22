@@ -1,23 +1,29 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { produce } from 'immer';
+import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 import TodoHeader from './components/Header';
 import TodoFooter from './components/Footer';
 import TodoList from './components/TodoList';
 import { ThemeProvider, useTheme } from './context/Theme';
 
-const Filter = {
-  ALL: 'all',
-  ACTIVE: 'active',
-  COMPLETED: 'completed'
-};
+import {
+  addTodo,
+  deleteTodo,
+  toggleTodo,
+  startEditTodo,
+  cancelEditTodo,
+  saveEditTodo,
+  clearCompleted,
+  setFilter,
+  toggleTheme
+} from './redux/actions';
 
-// const PAGE_SIZE = 8;
+import { FILTER_TYPES } from './redux/constants';
 
-function App() {
+export default function App() {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState(Filter.ALL);
-  // const [page, setPage] = useState(1);
   const [editingId, setEditingId] = useState(null);
 
   const { theme, toggleTheme } = useTheme();
@@ -26,69 +32,57 @@ function App() {
     return editingId ? todos.find(t => t.id === editingId) : null;
   }, [todos, editingId]);
 
-
-//nếu bỏ hét các useCallback với deps rỗng thì nó tạo ra func mới, memo sẽ k ngăn đc rerender
-  const handleStartEdit = useCallback((todo) => {
-    setEditingId(todo.id);
-  }, []);
-  const handleCancelEdit = useCallback(() => {
-    setEditingId(null);
-  }, []);
-
-  const handleSave = useCallback((text) => {
-    if (editingId) {
-      setTodos(produce((draft) => {
-        const index = draft.findIndex(t => t.id === editingId);
-        draft[index].text = text;
-      }));
-      setEditingId(null);
+  const filteredList = useMemo(() => {
+    switch (filter) {
+      case FILTER_TYPES.ACTIVE:
+        return todos.filter(t => !t.completed);
+      case FILTER_TYPES.COMPLETED:
+        return todos.filter(t => t.completed);
+      default:
+        return todos;
     }
-    else {
-      setTodos(produce((draft) => {
-        draft.unshift({ id: Date.now(), text, completed: false });
-      }));
-      // setPage(1);
-    }
-  }, [editingId]);
-
-  const handleToggleTodo = useCallback((index) => {
-    setTodos(produce((draft) => {
-      draft[index].completed = !draft[index].completed;
-    }));
-  }, []);
-
-  const handleDeleteTodo = useCallback((index) => {
-    setTodos(produce((draft) => {
-      draft.splice(index, 1);
-    }));
-    // setPage(prev => prev); 
-  }, [editingId]);
-
-  const handleClearCompleted = useCallback(() => {
-    setTodos(prev => prev.filter(t => !t.completed));
-    // setPage(1);
-  }, []);
-
-  const filteredList = useMemo(() =>
-    filter === Filter.ACTIVE
-      ? todos.filter(t => !t.completed)
-      : filter === Filter.COMPLETED
-        ? todos.filter(t => t.completed)
-        : todos
-    , [todos, filter]);
-
-  // const totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
-  // const validPage = Math.min(page, totalPages);
-
-  // if (page !== validPage) setPage(validPage); 
-
-  // const pagedTodos = useMemo(() => {
-  //   const start = (validPage - 1) * PAGE_SIZE;
-  //   return filteredList.slice(start, start + PAGE_SIZE);
-  // }, [filteredList, validPage]);
+  }, [todos, filter]);
 
   const activeCount = todos.filter(t => !t.completed).length;
   const completedCount = todos.length - activeCount;
+
+//nếu bỏ hét các useCallback với deps rỗng thì nó tạo ra func mới, memo sẽ k ngăn đc rerender
+  const handleCancelEdit = useCallback(() => {
+    dispatch(cancelEditTodo());
+  }, [dispatch]);
+
+  const handleStartEdit = useCallback((todo) => {
+    dispatch(startEditTodo(todo.id));
+  }, [dispatch]);
+
+  const handleSave = useCallback((text) => {
+    if (editingId) {
+      dispatch(saveEditTodo(editingId, text));
+    } else {
+      dispatch(addTodo(text));
+    }
+  }, [dispatch, editingId]);
+
+  const handleToggleTodo = useCallback((id) => {
+    dispatch(toggleTodo(id));
+  }, [dispatch]);
+
+  const handleDeleteTodo = useCallback((id) => {
+    dispatch(deleteTodo(id));
+  }, [dispatch]);
+
+  const handleClearCompleted = useCallback(() => {
+    dispatch(clearCompleted());
+  }, [dispatch]);
+
+  const handleFilterChange = useCallback((newFilter) => {
+    dispatch(setFilter(newFilter));
+  }, [dispatch]);
+
+  const handleToggleTheme = useCallback(() => {
+    dispatch(toggleTheme());
+  }, [dispatch]);
+
 
   return (
     <div className={`todoapp theme-${theme}`}>
@@ -120,19 +114,8 @@ function App() {
           filter={filter}
           onFilterChange={setFilter}
           onClearCompleted={handleClearCompleted}
-        // page={validPage}
-        // totalPages={totalPages}
-        // onPageChange={setPage}
         />
       )}
     </div>
   );
 }
-
-export default function VirtualApp() {
-  return (
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  )
-};

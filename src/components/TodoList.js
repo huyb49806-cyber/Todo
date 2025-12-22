@@ -26,13 +26,12 @@ function TodoList({ todos, onToggle, onDelete, onEdit, editingId }) {
           style={{position: "absolute", top: offsetY, left: 0, right: 0, padding: 0, margin: 0}}
         >
           {visibleTodos.map((todo, visibleIndex) => {
-            const fullIndex=startIndex + visibleIndex;
             return(
               <TodoItem
               key={todo.id}
               todo={todo}
-              onToggle={() => onToggle(fullIndex)}
-              onDelete={() => onDelete(fullIndex)}
+              onToggle={() => onToggle(todo.id)}
+              onDelete={() => onDelete(todo.id)}
               onEdit={onEdit}
               isEditingItem={todo.id === editingId}
               />
