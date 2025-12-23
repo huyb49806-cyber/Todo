@@ -22,9 +22,11 @@ import {
 import { FILTER_TYPES } from './redux/constants';
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState(Filter.ALL);
-  const [editingId, setEditingId] = useState(null);
+  const todos = useSelector(state=>state.todos.items);
+  const editingId = useSelector(state => state.todos.editingId); 
+  const filter = useSelector(state => state.filter);
+
+  const dispatch=useDispatch();
 
   const { theme, toggleTheme } = useTheme();
 
@@ -79,11 +81,6 @@ export default function App() {
     dispatch(setFilter(newFilter));
   }, [dispatch]);
 
-  const handleToggleTheme = useCallback(() => {
-    dispatch(toggleTheme());
-  }, [dispatch]);
-
-
   return (
     <div className={`todoapp theme-${theme}`}>
       <button onClick={toggleTheme} style={{ float: 'right', margin: '10px' }}>
@@ -112,7 +109,7 @@ export default function App() {
           activeCount={activeCount}
           completedCount={completedCount}
           filter={filter}
-          onFilterChange={setFilter}
+          onFilterChange={handleFilterChange}
           onClearCompleted={handleClearCompleted}
         />
       )}
