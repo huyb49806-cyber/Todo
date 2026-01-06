@@ -1,14 +1,13 @@
-export const ADD_TODO = 'todos/ADD_TODO';
-export const DELETE_TODO = 'todos/DELETE_TODO';
-export const TOGGLE_TODO = 'todos/TOGGLE_TODO';
-export const START_EDIT_TODO = 'todos/START_EDIT_TODO';
-export const CANCEL_EDIT_TODO = 'todos/CANCEL_EDIT_TODO';
-export const SAVE_EDIT_TODO = 'todos/SAVE_EDIT_TODO';
-export const CLEAR_COMPLETED = 'todos/CLEAR_COMPLETED';
-
+export const ADD_TODO = 'todos/addTodo';
+export const DELETE_TODO = 'todos/deleteTodo';
+export const TOGGLE_TODO = 'todos/toggleTodo';
+export const SAVE_EDIT_TODO = 'todos/saveEditTodo';
+export const CLEAR_COMPLETED = 'todos/clearCompleted';
 export const SET_FILTER = 'filters/SET_FILTER';
-export const TOGGLE_THEME = 'theme/TOGGLE_THEME';
-
+export const SET_PAGE = 'pagination/SET_PAGE';
+export const RESET_PAGE = 'pagination/RESET_PAGE';
+export const SET_EDITING_ID = 'editing/SET_EDITING_ID';
+export const CLEAR_EDITING_ID = 'editing/CLEAR_EDITING_ID';
 
 export const FILTER_TYPES = {
   ALL: 'all',

@@ -1,8 +1,8 @@
 import * as types from '../constants';
+import { produce } from 'immer'
 
 const initialState = {
-  items: [],
-  editingId: null
+  items: []
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -20,26 +20,10 @@ export default function todosReducer(state = initialState, action) {
       };
 
     case types.TOGGLE_TODO:
-      return {
-        ...state,
-        items: state.items.map(todo =>
-          todo.id === action.payload
-            ? { ...todo, completed: !todo.completed }
-            : todo
-        )
-      };
-
-    case types.START_EDIT_TODO:
-      return {
-        ...state,
-        editingId: action.payload
-      };
-
-    case types.CANCEL_EDIT_TODO:
-      return {
-        ...state,
-        editingId: null
-      };
+      return produce(state, draft => {
+        const todo = draft.items.find(t => t.id === action.payload);
+        todo.completed = !todo.completed;
+    });
 
     case types.SAVE_EDIT_TODO:
       return {
