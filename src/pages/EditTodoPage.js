@@ -8,9 +8,13 @@ export default function EditTodoPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const params = useParams();
+  console.group(`--- Edit Page Mounted for ID: ${id} ---`);
+  console.log('1. URL Params object:', params);
+  console.groupEnd();
+
   useEffect(() => {
-    if (id) dispatch(setEditingId(id));
+    dispatch(setEditingId(id));
     return () => dispatch(clearEditingId());
   }, [id, dispatch]);
 
@@ -28,8 +32,6 @@ export default function EditTodoPage() {
       navigate('/');
     }
   };
-
-  if (!todo) return <div className="info">Todo not found!</div>;
 
   return (
     <div className="header">

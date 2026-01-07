@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { addTodo } from '../redux/actions';
 
 export default function AddTodoPage() {
@@ -12,9 +12,12 @@ export default function AddTodoPage() {
     e.preventDefault();
     if (text.trim()) {
       dispatch(addTodo(text.trim()));
-      navigate('/');
+      navigate('/');    //đổi url /add về path / tương ứng comp TodoListData
     }
   };
+
+  // const location = useLocation();
+  // console.log('Current URL Path:', location.pathname);
 
   return (
     <div className="header">
