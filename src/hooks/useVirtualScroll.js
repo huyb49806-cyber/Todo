@@ -15,6 +15,7 @@ export const useVirtualScroll = (dataLength, itemHeight = ITEM_HEIGHT, container
         const scrollTop = containerRef.current.scrollTop;
         // console.log("scrollTop:", containerRef.current.scrollTop);
         const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight));
+        // console.log({scrollTop,startIndex,itemHeight,});
         const visibleCount = Math.ceil(containerHeight / itemHeight);
         const endIndex = Math.min(
             dataLength, 

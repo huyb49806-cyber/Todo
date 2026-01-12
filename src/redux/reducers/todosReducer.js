@@ -7,6 +7,12 @@ const initialState = {
 
 export default function todosReducer(state = initialState, action) {
   switch (action.type) {
+    case types.FETCH_TODOS_SUCCESS:
+      return {
+        ...state,
+        items: action.payload
+      };
+
     case types.ADD_TODO:
       return {
         ...state,

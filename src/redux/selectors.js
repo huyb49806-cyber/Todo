@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { FILTER_TYPES } from './constants';
 
+// input selector
 const selectTodoItems = state => state.todos.items;
 const selectFilter = state => state.filter;
 const selectPagination = state => state.pagination;
@@ -9,6 +10,7 @@ const selectEditingId = state => state.editing.editingId;
 export const selectFilteredTodos = createSelector(
   [selectTodoItems, selectFilter],
   (todos, filter) => {
+    console.log('ham 1 dc chay lai')
     switch (filter) {
       case FILTER_TYPES.ACTIVE:
         return todos.filter(t => !t.completed);
@@ -23,6 +25,7 @@ export const selectFilteredTodos = createSelector(
 export const selectPaginatedTodos = createSelector(
   [selectFilteredTodos, selectPagination],
   (filteredTodos, pagination) => {
+    
     const { currentPage, itemsPerPage } = pagination;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

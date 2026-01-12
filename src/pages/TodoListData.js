@@ -1,33 +1,39 @@
-import React, { useCallback } from 'react';
+import React, { useCallback,useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectPaginatedTodos } from '../redux/selectors';
 import { 
-  deleteTodo, toggleTodo, setPage, setFilter, clearCompleted, setEditingId 
+  fetchData,deleteTodo, toggleTodo, setPage, setFilter, clearCompleted, setEditingId 
 } from '../redux/actions';
 import TodoItem from '../components/TodoItem';
 import TodoFooter from '../components/Footer';
-import Pagination from '../components/Pagination'; // File Pagination của bạn
+import Pagination from '../components/Pagination';
+
 
 export default function TodoListData() {
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchData())
+  },[dispatch]);
+
   const navigate = useNavigate();
 
-  // Sử dụng Reselect lấy dữ liệu đã phân trang
-  const { visibleTodos, totalPages, currentPage, totalItems } = useSelector(selectPaginatedTodos);
+  const { visibleTodos, totalPages, currentPage } = useSelector(selectPaginatedTodos);
   const filter = useSelector(state => state.filter);
   
-  // Tính count cho Footer (Lưu ý: activeCount tính trên toàn bộ list gốc chứ ko phải list phân trang)
   const allTodos = useSelector(state => state.todos.items);
   const activeCount = allTodos.filter(t => !t.completed).length;
   const completedCount = allTodos.length - activeCount;
 
-  const handleToggle = useCallback((id) => dispatch(toggleTodo(id)), [dispatch]);
+  const handleToggle = useCallback((id)=>{
+    const todo=allTodos.find(t=>t.id===id);
+    dispatch(toggleTodo(id,todo.completed))
+  }, [dispatch, allTodos]);
   const handleDelete = useCallback((id) => dispatch(deleteTodo(id)), [dispatch]);
   
-  // Chuyển hướng sang trang Edit
   const handleEdit = useCallback((todo) => {
-    dispatch(setEditingId(todo.id)); // Cập nhật vào editingReducer
+    dispatch(setEditingId(todo.id));
     navigate(`/edit/${todo.id}`);
   }, [dispatch, navigate]);
 
@@ -46,13 +52,12 @@ export default function TodoListData() {
               onToggle={() => handleToggle(todo.id)}
               onDelete={() => handleDelete(todo.id)}
               onEdit={handleEdit}
-              isEditingItem={false} // Vì edit giờ ở trang riêng
+              isEditingItem={false}
             />
           ))}
         </ul>
       </section>
 
-      {/* Pagination Control */}
       <Pagination 
         page={currentPage} 
         totalPages={totalPages} 

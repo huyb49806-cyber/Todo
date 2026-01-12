@@ -8,7 +8,7 @@ export const SET_PAGE = 'pagination/SET_PAGE';
 export const RESET_PAGE = 'pagination/RESET_PAGE';
 export const SET_EDITING_ID = 'editing/SET_EDITING_ID';
 export const CLEAR_EDITING_ID = 'editing/CLEAR_EDITING_ID';
-
+export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
 export const FILTER_TYPES = {
   ALL: 'all',
   ACTIVE: 'active',

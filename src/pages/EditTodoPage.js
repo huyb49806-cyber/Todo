@@ -8,10 +8,9 @@ export default function EditTodoPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const params = useParams();
-  console.group(`--- Edit Page Mounted for ID: ${id} ---`);
-  console.log('1. URL Params object:', params);
-  console.groupEnd();
+
+  // const params = useParams();
+  // console.log('1. URL Params object:', params);
 
   useEffect(() => {
     dispatch(setEditingId(id));
@@ -22,7 +21,7 @@ export default function EditTodoPage() {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    if (todo) setText(todo.text);
+    setText(todo.text);
   }, [todo]);
 
   const handleSave = (e) => {
