@@ -31,6 +31,7 @@ export const addTodo = (text) => {
         type:types.ADD_TODO,
         payload:response.data
       });
+      dispatch(setPage(1));
     }
     catch(error){
       console.error("loi them moi");
@@ -91,10 +92,15 @@ export const clearCompleted = () => ({
   type: types.CLEAR_COMPLETED
 });
 
-export const setFilter = (filterType) => ({
-  type: types.SET_FILTER,
-  payload: filterType
-});
+export const setFilter = (filterType) => {
+  return (dispatch) => {
+    dispatch({
+      type: types.SET_FILTER,
+      payload: filterType
+    });
+    dispatch(setPage(1));
+  }
+};
 
 export const setEditingId = (id) => ({
   type: types.SET_EDITING_ID,

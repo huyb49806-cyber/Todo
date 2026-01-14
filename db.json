@@ -1,24 +1,99 @@
 {
   "todos": [
-    { "id": "1", "text": "Tìm hiểu kiến thức về Promise", "completed": true },
-    { "id": "2", "text": "Thực hành Axios với API giả", "completed": false },
-    { "id": "3", "text": "Chạy bộ 30 phút buổi sáng", "completed": false },
-    { "id": "4", "text": "Đọc 20 trang sách Clean Code", "completed": true },
-    { "id": "5", "text": "Đi chợ mua đồ ăn tối", "completed": false },
-    { "id": "6", "text": "Fix bug CSS trang Login", "completed": false },
-    { "id": "7", "text": "Họp team daily lúc 9h", "completed": true },
-    { "id": "8", "text": "Trả lời email khách hàng", "completed": false },
-    { "id": "9", "text": "Dọn dẹp bàn làm việc", "completed": true },
-    { "id": "10", "text": "Nộp báo cáo tiến độ tuần", "completed": false },
-    { "id": "11", "text": "Đặt lịch khám răng định kỳ", "completed": false },
-    { "id": "12", "text": "Ôn tập kiến thức React Hooks", "completed": true },
-    { "id": "13", "text": "Gọi điện về cho mẹ", "completed": false },
-    { "id": "14", "text": "Tưới cây ngoài ban công", "completed": true },
-    { "id": "15", "text": "Xem video tutorial về Redux", "completed": false },
-    { "id": "16", "text": "Backup dữ liệu máy tính", "completed": false },
-    { "id": "17", "text": "Thanh toán tiền điện nước", "completed": true },
-    { "id": "18", "text": "Viết blog tổng kết tuần", "completed": false },
-    { "id": "19", "text": "Cập nhật CV profile", "completed": false },
-    { "id": "20", "text": "Ngủ sớm trước 11h đêm", "completed": false }
+    {
+      "id": "2",
+      "text": "Thực hành Axios với API giả",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "text": "Chạy bộ 30 phút buổi sáng",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "text": "Đọc 20 trang sách Clean Code",
+      "completed": true
+    },
+    {
+      "id": "5",
+      "text": "Đi chợ mua đồ ăn tối",
+      "completed": false
+    },
+    {
+      "id": "6",
+      "text": "Fix bug CSS trang Login",
+      "completed": false
+    },
+    {
+      "id": "7",
+      "text": "Họp team daily lúc 9h",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "text": "Trả lời email khách hàng",
+      "completed": false
+    },
+    {
+      "id": "9",
+      "text": "Dọn dẹp bàn làm việc",
+      "completed": true
+    },
+    {
+      "id": "10",
+      "text": "Nộp báo cáo tiến độ tuần",
+      "completed": false
+    },
+    {
+      "id": "11",
+      "text": "Đặt lịch khám răng định kỳ",
+      "completed": false
+    },
+    {
+      "id": "12",
+      "text": "Ôn tập kiến thức React Hooks",
+      "completed": true
+    },
+    {
+      "id": "13",
+      "text": "Gọi điện về cho mẹ",
+      "completed": false
+    },
+    {
+      "id": "14",
+      "text": "Tưới cây ngoài ban công",
+      "completed": true
+    },
+    {
+      "id": "15",
+      "text": "Xem video tutorial về Redux",
+      "completed": false
+    },
+    {
+      "id": "16",
+      "text": "Backup dữ liệu máy tính",
+      "completed": false
+    },
+    {
+      "id": "17",
+      "text": "Thanh toán tiền điện nước",
+      "completed": true
+    },
+    {
+      "id": "18",
+      "text": "Viết blog tổng kết tuần",
+      "completed": false
+    },
+    {
+      "id": "19",
+      "text": "Cập nhật CV profile",
+      "completed": false
+    },
+    {
+      "id": "20",
+      "text": "Ngủ sớm trước 11h đêm",
+      "completed": false
+    }
   ]
 }
