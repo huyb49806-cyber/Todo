@@ -6,7 +6,8 @@ const api_url='http://localhost:8000/todos';
 export const fetchData = ()=>{
   return async (dispatch)=>{
     try{
-      const response=await axios.get(api_url);
+      const response=await axios.get(`${api_url}?_sort=-id`);
+      // console.log(response.data);
       dispatch({
         type:types.FETCH_TODOS_SUCCESS,
         payload: response.data
@@ -20,6 +21,7 @@ export const fetchData = ()=>{
 
 export const addTodo = (text) => {
   return async (dispatch)=>{
+    dispatch({type: types.ADD_TODO_REQUEST});
     try{
       const newTodo={
         id:Date.now().toString(), //vi json-sv hd tot hon voi id dang chuoi
@@ -28,13 +30,15 @@ export const addTodo = (text) => {
       };
       const response=await axios.post(api_url, newTodo);
       dispatch({
-        type:types.ADD_TODO,
+        type:types.ADD_TODO_SUCCESS,
         payload:response.data
       });
       dispatch(setPage(1));
     }
     catch(error){
       console.error("loi them moi");
+      dispatch({type: types.ADD_TODO_FAILURE});
+      throw error;
     }
   };
 };
@@ -54,19 +58,22 @@ export const deleteTodo = (id) =>{
   };
 };
 
+//flow optimistic UI: vẽ UI(đổi trạng thái) rồi mới gọi API
 export const toggleTodo = (id, currentCpl) => {
   return async (dispatch)=>{
+    dispatch({
+      type: types.TOGGLE_TODO,
+      payload:id
+    })
     try{
-      const reponse=await axios.patch(`${api_url}/${id}`,{
+      const response=await axios.patch(`${api_url}/${id}`,{
         completed: !currentCpl
       });
-      dispatch({
-        type: types.TOGGLE_TODO,
-        payload:id
-      })
     }
     catch(error){
       console.error('loi toggle')
+      dispatch({type: types.TOGGLE_TODO, payload: id})
+      alert("lỗi")
     }
   };
 }

@@ -1,4 +1,6 @@
-export const ADD_TODO = 'todos/addTodo';
+export const ADD_TODO_REQUEST = 'todos/addTodoRequest';
+export const ADD_TODO_SUCCESS = 'todos/addTodoSuccess'
+export const ADD_TODO_FAILURE = 'todos/addTodoFailure'
 export const DELETE_TODO = 'todos/deleteTodo';
 export const TOGGLE_TODO = 'todos/toggleTodo';
 export const SAVE_EDIT_TODO = 'todos/saveEditTodo';

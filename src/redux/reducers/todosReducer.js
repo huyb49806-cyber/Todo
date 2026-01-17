@@ -2,7 +2,9 @@ import * as types from '../constants';
 import { produce } from 'immer'
 
 const initialState = {
-  items: []
+  items: [],
+  isLoading: false,
+  error: null
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -13,11 +15,25 @@ export default function todosReducer(state = initialState, action) {
         items: action.payload
       };
 
-    case types.ADD_TODO:
+    case types.ADD_TODO_REQUEST:
       return {
         ...state,
-        items: [action.payload, ...state.items]
+        isLoading: true
       };
+
+    case types.ADD_TODO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        items: [action.payload, ...state.items]
+      }
+    
+    case types.ADD_TODO_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
 
     case types.DELETE_TODO:
       return {

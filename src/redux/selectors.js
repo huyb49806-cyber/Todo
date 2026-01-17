@@ -10,7 +10,6 @@ const selectEditingId = state => state.editing.editingId;
 export const selectFilteredTodos = createSelector(
   [selectTodoItems, selectFilter],
   (todos, filter) => {
-    console.log('ham 1 dc chay lai')
     switch (filter) {
       case FILTER_TYPES.ACTIVE:
         return todos.filter(t => !t.completed);
