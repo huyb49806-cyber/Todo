@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectPaginatedTodos } from '../redux/selectors';
 import {
-  fetchData, deleteTodo, toggleTodo, setPage, setFilter, clearCompleted, setEditingId
+  fetchData, setPage, setFilter, clearCompleted
 } from '../redux/actions';
 import TodoItem from '../components/TodoItem';
 import TodoFooter from '../components/Footer';
@@ -16,8 +16,6 @@ export default function TodoListData() {
   useEffect(() => {
     dispatch(fetchData())
   }, [dispatch]);
-
-  const navigate = useNavigate();
 
   const { visibleTodos, totalPages, currentPage } = useSelector(selectPaginatedTodos);
   const filter = useSelector(state => state.filter);
@@ -34,25 +32,13 @@ export default function TodoListData() {
   //   }
   // )
 
-  const handleToggle = useCallback((id) => {
-    const todo = allTodos.find(t => t.id === id);
-    // setOptimisticTodo(id);
-    dispatch(toggleTodo(id, todo.completed))
-  }, [dispatch, allTodos]);
-  const handleDelete = useCallback((id) => dispatch(deleteTodo(id)), [dispatch]);
-
-  const handleEdit = useCallback((todo) => {
-    dispatch(setEditingId(todo.id));
-    navigate(`/edit/${todo.id}`);
-  }, [dispatch, navigate]);
-
   const handlePageChange = useCallback((page) => dispatch(setPage(page)), [dispatch]);
   const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), [dispatch]);
   const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), [dispatch]);
 
   return (
     <div>
-      {true ? (
+      {isLoading ? (
         <div className="loading-container">
           <div className="loader"></div>
           <p>Đang tải dữ liệu...</p>
@@ -64,9 +50,6 @@ export default function TodoListData() {
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                onToggle={() => handleToggle(todo.id)}
-                onDelete={() => handleDelete(todo.id)}
-                onEdit={handleEdit}
                 isEditingItem={false}
               />
             ))}
