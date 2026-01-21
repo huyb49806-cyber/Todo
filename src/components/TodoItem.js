@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toggleTodo, deleteTodo, setEditingId } from '../redux/actions';
 
-function TodoItem({ todo, onToggle, onDelete, onEdit, isEditingItem }) {
+function TodoItem({ todo, isEditingItem }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

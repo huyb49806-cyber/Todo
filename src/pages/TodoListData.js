@@ -24,14 +24,6 @@ export default function TodoListData() {
   const activeCount = allTodos.filter(t => !t.completed).length;
   const completedCount = allTodos.length - activeCount;
 
-  //useOptimistic tạo ra 1 bản sao để cập nhập UI trong lúc chờ server phản hồi
-  // const [optimisticTodos, setOptimisticTodo]= useOptimistic(
-  //   visibleTodos,
-  //   (currentList, todoId)=>{
-  //     return currentList.map(t=>t.id===todoId?{...t,completed:!t.completed}:t);
-  //   }
-  // )
-
   const handlePageChange = useCallback((page) => dispatch(setPage(page)), [dispatch]);
   const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), [dispatch]);
   const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), [dispatch]);

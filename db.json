@@ -1,79 +1,138 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123",
+      "name": "Huy"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "123",
+      "name": "Khách"
+    }
+  ],
   "todos": [
     {
       "id": "1768396624847",
       "text": "Hoc tap",
-      "completed": true
+      "completed": false,
+      "userId": "1"
     },
     {
       "id": "1768396647854",
       "text": "hoc tap",
-      "completed": false
+      "completed": true,
+      "userId": "1"
     },
     {
       "id": "1768622145358",
       "text": "gnn",
-      "completed": false
+      "completed": false,
+      "userId": "1"
     },
     {
       "id": "1768622190300",
       "text": "adddd",
-      "completed": false
+      "completed": true,
+      "userId": "1"
     },
     {
       "id": "1768622250124",
       "text": "bhthm",
-      "completed": false
+      "completed": false,
+      "userId": "1"
     },
     {
       "id": "1768636619186",
       "text": "double submissions",
-      "completed": true
+      "completed": true,
+      "userId": "1"
     },
     {
       "id": "1768636619403",
       "text": "double submissions",
-      "completed": true
+      "completed": true,
+      "userId": "1"
     },
     {
       "id": "1768636620079",
       "text": "double submissions",
-      "completed": true
+      "completed": true,
+      "userId": "1"
     },
     {
       "id": "1768637967155",
       "text": "Thực hành Axios với API giả",
-      "completed": false
+      "completed": false,
+      "userId": "2"
     },
     {
       "id": "1768638455237",
       "text": "Học tập và làm việc",
-      "completed": false
+      "completed": false,
+      "userId": "2"
     },
     {
       "id": "1768641982161",
       "text": "đi ngủ",
-      "completed": false
+      "completed": true,
+      "userId": "2"
     },
     {
       "id": "1768642009460",
       "text": "thức dậy",
-      "completed": false
+      "completed": false,
+      "userId": "2"
     },
     {
       "id": "1768642350886",
       "text": "12345",
-      "completed": true
+      "completed": true,
+      "userId": "2"
     },
     {
       "id": "1768642360666",
       "text": "678910",
-      "completed": true
+      "completed": true,
+      "userId": "2"
     },
     {
       "id": "1768642381067",
       "text": "12345678910",
-      "completed": true
+      "completed": true,
+      "userId": "2"
+    },
+    {
+      "id": "1768706063191",
+      "text": "hojc bai",
+      "completed": true,
+      "userId": "2"
+    },
+    {
+      "id": "1768706073519",
+      "text": "hoc baiiii",
+      "completed": false,
+      "userId": "2"
+    },
+    {
+      "id": "1768706080043",
+      "text": "dskudihlsj",
+      "completed": false,
+      "userId": "2"
+    },
+    {
+      "id": "1768716764697",
+      "text": "ngủ",
+      "completed": false,
+      "userId": "2"
+    },
+    {
+      "id": "1768994856709",
+      "text": "go out",
+      "completed": false,
+      "userId": "2"
     }
   ]
 }

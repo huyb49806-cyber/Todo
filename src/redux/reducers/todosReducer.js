@@ -4,7 +4,6 @@ import { produce } from 'immer'
 const initialState = {
   items: [],
   isLoading: false,
-  error: null
 };
 
 export default function todosReducer(state = initialState, action) {
