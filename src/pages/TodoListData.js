@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useOptimistic } from 'react';
+import {useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectPaginatedTodos } from '../redux/selectors';
 import {
   fetchData, setPage, setFilter, clearCompleted
 } from '../redux/actions';
@@ -12,19 +10,31 @@ import Pagination from '../components/Pagination';
 
 export default function TodoListData() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.todos.isLoading);
-  useEffect(() => {
-    dispatch(fetchData())
-  }, [dispatch]);
-
-  const { visibleTodos, totalPages, currentPage } = useSelector(selectPaginatedTodos);
+  const [isLoading, setIsLoading] = useState(false);
+  const {items,pagination} = useSelector(state => state.todos);
   const filter = useSelector(state => state.filter);
+  const totalPages=Math.ceil(pagination._totalRows/pagination._limit);
+  const loadData = useCallback(async () => {
+      setIsLoading(true);
+      try {
+        await dispatch(fetchData());
+      } catch (err) {
+        alert("Lỗi tải dữ liệu");
+      } finally {
+        setIsLoading(false);
+      }
+  }, [dispatch]);
+  useEffect(() => {
+    loadData;
+  }, [dispatch]);
+  const activeCount = items.filter(t => !t.completed).length;
+  const completedCount = items.length - activeCount;
 
-  const allTodos = useSelector(state => state.todos.items);
-  const activeCount = allTodos.filter(t => !t.completed).length;
-  const completedCount = allTodos.length - activeCount;
-
-  const handlePageChange = useCallback((page) => dispatch(setPage(page)), [dispatch]);
+  const handlePageChange = useCallback(async (f) => {
+    setIsLoading(true);
+    await dispatch(setFilter(f));
+    setIsLoading(false);
+  }, [dispatch]);
   const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), [dispatch]);
   const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), [dispatch]);
 
@@ -51,7 +61,7 @@ export default function TodoListData() {
 
 
       <Pagination
-        page={currentPage}
+        page={pagination._page}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />

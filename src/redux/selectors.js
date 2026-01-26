@@ -40,5 +40,5 @@ export const selectPaginatedTodos = createSelector(
 
 export const selectEditingTodo = createSelector(
   [selectTodoItems, selectEditingId],
-  (todos, editingId) => todos.find(t => t.id == editingId)
+  (todos, editingId) => todos.find(t => t.id === editingId)
 );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addTodo } from '../redux/actions';
 
 export default function AddTodoPage() {

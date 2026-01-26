@@ -1,8 +1,6 @@
-export const LOGIN_REQUEST = 'auth/loginRequest';
 export const LOGIN_SUCCESS = 'auth/loginSuccess';
 export const LOGIN_FAILURE = 'auth/loginFailure';
 export const LOGOUT = 'auth/logout';
-export const ADD_TODO_REQUEST = 'todos/addTodoRequest';
 export const ADD_TODO_SUCCESS = 'todos/addTodoSuccess'
 export const ADD_TODO_FAILURE = 'todos/addTodoFailure'
 export const DELETE_TODO = 'todos/deleteTodo';
@@ -15,6 +13,8 @@ export const RESET_PAGE = 'pagination/RESET_PAGE';
 export const SET_EDITING_ID = 'editing/SET_EDITING_ID';
 export const CLEAR_EDITING_ID = 'editing/CLEAR_EDITING_ID';
 export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const FILTER_TYPES = {
   ALL: 'all',
   ACTIVE: 'active',

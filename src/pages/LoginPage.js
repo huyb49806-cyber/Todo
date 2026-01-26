@@ -4,25 +4,31 @@ import { login } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, isAuthenticated } = useSelector(state => state.auth);
+  const {error, isAuthenticated} = useSelector(state => state.auth);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated){
       navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if(!username || !password) {
         alert("Vui lòng nhập đủ thông tin");
         return;
     }
-    dispatch(login(username, password, navigate));
+    setIsLoading(true);
+    try{
+      await dispatch(login(username, password, navigate));
+    }catch{
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -36,6 +42,7 @@ const LoginPage = () => {
             type="text" 
             value={username} 
             onChange={(e) => setUsername(e.target.value)} 
+            disabled={isLoading}
           />
         </div>
         
@@ -45,11 +52,12 @@ const LoginPage = () => {
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
+            disabled={isLoading}
           />
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Đang kiểm tra...' : 'Login'}
+          {isLoading ? 'Đang kiểm tra...' : 'Login'}
         </button>
       </form>
     </div>

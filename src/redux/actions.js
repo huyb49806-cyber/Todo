@@ -5,43 +5,69 @@ axios.defaults.withCredentials = true;
 
 const users_api_url = 'http://localhost:8000/users';
 const login_api_url = 'http://localhost:8000/login';
+const register_api_url= 'http://localhost:8000/register';
 const logout_api_url = 'http://localhost:8000/logout';
 const check_auth_url = 'http://localhost:8000/check-auth';
 const api_url='http://localhost:8000/todos';
 
+export const register =(user,nav)=>async(dispatch)=>{
+  dispatch({type:types.REGISTER_REQUEST});
+  try{
+    await axios.post(register_api_url,user)
+    alert("dag ki tcong! Vui long dn");
+    nav('/login');
+    dispatch({type:types.REGISTER_SUCCESS});
+  }catch(err){
+    alert(err.response?.data?.error||"dki tbai")
+  }
+}
+
 export const fetchData = ()=>{
   return async (dispatch,getState)=>{
     try{
-      const {user}=getState().auth;
-      const response=await axios.get(`${api_url}?userId=${user.id}&_sort=id&_order=desc`);
+      const {pagination}=getState().todos;
+      const params = {
+        _page: pagination._page,
+        _limit: pagination._limit,
+        _sort: 'id',
+        _order: 'desc'
+      };
+      const response=await axios.get(api_url,{params});
+      const totalRows = response.headers['x-total-count'];
       dispatch({
-        type:types.FETCH_TODOS_SUCCESS,
-        payload: response.data
+        type: types.FETCH_TODOS_SUCCESS,
+        payload: {
+          data: response.data,
+          pagination: {
+             _totalRows: parseInt(totalRows),
+             _page: pagination._page,
+             _limit: pagination._limit
+          }
+        }
       });
+      return response;
     }
-    catch(error){
-      console.error("loi tai ds");
+    catch(err){
+      console.error("loi tai ds",err);
+      throw err;
     }
   };
 };
 
 export const addTodo = (text) => {
   return async (dispatch,getState)=>{
-    dispatch({type: types.ADD_TODO_REQUEST});
     try{
-      const {user}=getState().auth;
       const newTodo={
         id:Date.now().toString(), //vi json-sv hd tot hon voi id dang chuoi
         text: text,
         completed: false,
-        userId: user.id
       };
       const response=await axios.post(api_url, newTodo);
       dispatch({
         type:types.ADD_TODO_SUCCESS,
         payload:response.data
       });
-      dispatch(setPage(1));
+      return await dispatch(setPage(1));
     }
     catch(error){
       console.error("loi them moi");
@@ -127,43 +153,46 @@ export const clearEditingId = () => ({
   type: types.CLEAR_EDITING_ID
 });
 
-export const setPage = (page) => ({
-  type: types.SET_PAGE,
-  payload: page
-});
+export const setPage = (page) => {
+  return async(dispatch)=>{
+    dispatch({
+      type: types.SET_PAGE,
+      payload: page
+    })
+    return await dispatch(fetchData);
+  }
+};
 
 export const checkAuth = () => {
     return async (dispatch) => {
-        dispatch({ type: types.LOGIN_REQUEST });
         try {
             const response = await axios.get(check_auth_url);
             dispatch({
                 type: types.LOGIN_SUCCESS,
                 payload: response.data
             });
+            return response.data;
         } catch (error) {
             dispatch({
                 type: types.LOGIN_FAILURE,
                 payload: null 
             });
+            throw error;
         }
     }
 }
 
 export const login = (username, password, navigate) => {
   return async (dispatch) => {
-    dispatch({ type: types.LOGIN_REQUEST });
-
     try {
-      const response = await axios.post(login_api_url, { username, password });
+      const response = await axios.post(login_api_url, {email: username, password });
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: response.data 
       });
-      
       if (navigate) navigate('/');
-
-    } catch (error) {
+      return response.data;
+    } catch (error){
       dispatch({
         type: types.LOGIN_FAILURE,
         payload: "Sai tên đăng nhập hoặc mật khẩu"

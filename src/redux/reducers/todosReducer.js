@@ -3,7 +3,12 @@ import { produce } from 'immer'
 
 const initialState = {
   items: [],
-  isLoading: false,
+  pagination:{
+    _page: 1,
+    _limit: 5,
+    _total:0
+  },
+  error: null
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -11,14 +16,21 @@ export default function todosReducer(state = initialState, action) {
     case types.FETCH_TODOS_SUCCESS:
       return {
         ...state,
-        items: action.payload
+        items: action.payload.data,
+        panigation:{
+          ...state.pagination,
+          ...state.payload.pagination
+        }
       };
 
-    case types.ADD_TODO_REQUEST:
-      return {
+    case types.SET_PAGE:
+      return{
         ...state,
-        isLoading: true
-      };
+        pagination:{
+          ...state.pagination,
+          _page: action.payload
+        }
+      }
 
     case types.ADD_TODO_SUCCESS:
       return {
@@ -26,11 +38,10 @@ export default function todosReducer(state = initialState, action) {
         isLoading: false,
         items: [action.payload, ...state.items]
       }
-    
+
     case types.ADD_TODO_FAILURE:
       return {
         ...state,
-        isLoading: false,
         error: action.payload
       }
 
