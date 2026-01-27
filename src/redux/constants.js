@@ -15,8 +15,12 @@ export const CLEAR_EDITING_ID = 'editing/CLEAR_EDITING_ID';
 export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
+export const ADMIN_GET_USER='admin/getUser'
+export const ADMIN_DELETE_USER='admin/deleteUser'
+
 export const FILTER_TYPES = {
   ALL: 'all',
   ACTIVE: 'active',
   COMPLETED: 'completed'
 };
+

@@ -6,6 +6,7 @@ import {
 import TodoItem from '../components/TodoItem';
 import TodoFooter from '../components/Footer';
 import Pagination from '../components/Pagination';
+import UserManagement from '../components/Admin';
 
 
 export default function TodoListData() {
@@ -14,6 +15,8 @@ export default function TodoListData() {
   const {items,pagination} = useSelector(state => state.todos);
   const filter = useSelector(state => state.filter);
   const totalPages=pagination?Math.ceil(pagination._totalRows/pagination._limit):0;
+  const {user}=useSelector(state=>state.auth);
+
   const loadData = useCallback(async () => {
       setIsLoading(true);
       try {
@@ -70,6 +73,9 @@ export default function TodoListData() {
         onFilterChange={handleFilterChange}
         onClearCompleted={handleClearCompleted}
       />
+      {user?.role=='ADMIN'&&(
+        <UserManagement/>
+      )}
     </div>
   );
 }

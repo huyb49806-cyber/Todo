@@ -212,3 +212,28 @@ export const logout = () => {
     }
   };
 };
+
+export const getallUsers=()=>async(dispatch)=>{
+  try{
+    const response=await axios.get(users_api_url);
+    console.log(response.data);
+    dispatch({
+      type: 'types.ADMIN_GET_USER',
+      payload: response.data
+    });
+  }catch{
+
+  }
+};
+
+export const deleteUser=(userId)=>async(dispatch)=>{
+  try{
+    await axios.delete(`${users_api_url}/${userId}`);
+    dispatch({
+      type:'types.ADMIN_DELETE_USER',
+      payload: userId
+    })
+  }catch{
+
+  }
+}
