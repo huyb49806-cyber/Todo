@@ -2,15 +2,17 @@
   "users": [
     {
       "id": "1",
-      "username": "admin",
+      "email": "admin",
       "password": "123",
-      "name": "Huy"
+      "name": "HuyAdmin",
+      "role": "ADMIN"
     },
     {
-      "id": "2",
-      "username": "user",
-      "password": "123",
-      "name": "Khách"
+      "id": 1769509933007,
+      "email": "huybui27100@gmail.com",
+      "password": "Huy27102006",
+      "name": "Huy",
+      "role": "USER"
     }
   ],
   "todos": [
@@ -133,6 +135,34 @@
       "text": "go out",
       "completed": false,
       "userId": "2"
+    },
+    {
+      "id": "1769509958827",
+      "text": "svsdv",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-01-27T10:32:38.838Z"
+    },
+    {
+      "id": "1769509962185",
+      "text": "sdvsbfbfg",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-01-27T10:32:42.194Z"
+    },
+    {
+      "id": "1769510259846",
+      "text": "bdbth",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-01-27T10:37:39.876Z"
+    },
+    {
+      "id": "1769510337552",
+      "text": "sgsstyhjhk",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-01-27T10:38:57.582Z"
     }
   ]
 }

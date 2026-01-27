@@ -28,8 +28,14 @@ const LoginPage = () => {
       await dispatch(login(username, password, navigate));
     }catch{
       setIsLoading(false);
+    }finally{
+      setIsLoading(false);
     }
   };
+
+  const handleRegisterNav=()=>{
+    navigate('/register');
+  }
 
   return (
     <div style={{ padding: '50px', textAlign: 'center' }}>
@@ -56,10 +62,14 @@ const LoginPage = () => {
           />
         </div>
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={isLoading}>
           {isLoading ? 'Đang kiểm tra...' : 'Login'}
         </button>
       </form>
+      <button 
+        onClick={handleRegisterNav} 
+        style={{cursor: 'pointer'}}
+      >Đăng Kí</button>
     </div>
   );
 };

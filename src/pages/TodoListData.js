@@ -13,7 +13,7 @@ export default function TodoListData() {
   const [isLoading, setIsLoading] = useState(false);
   const {items,pagination} = useSelector(state => state.todos);
   const filter = useSelector(state => state.filter);
-  const totalPages=Math.ceil(pagination._totalRows/pagination._limit);
+  const totalPages=pagination?Math.ceil(pagination._totalRows/pagination._limit):0;
   const loadData = useCallback(async () => {
       setIsLoading(true);
       try {
@@ -25,15 +25,13 @@ export default function TodoListData() {
       }
   }, [dispatch]);
   useEffect(() => {
-    loadData;
-  }, [dispatch]);
+    loadData();
+  }, [pagination?._page,filter,loadData]);
   const activeCount = items.filter(t => !t.completed).length;
   const completedCount = items.length - activeCount;
 
-  const handlePageChange = useCallback(async (f) => {
-    setIsLoading(true);
-    await dispatch(setFilter(f));
-    setIsLoading(false);
+  const handlePageChange = useCallback((f) => {
+    dispatch(setPage(f));
   }, [dispatch]);
   const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), [dispatch]);
   const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), [dispatch]);
@@ -48,7 +46,7 @@ export default function TodoListData() {
       ) : (
         <section className="main" style={{ borderTop: 'none' }}>
           <ul className="todo-list">
-            {visibleTodos.map(todo => (
+            {items.map(todo => (
               <TodoItem
                 key={todo.id}
                 todo={todo}
@@ -58,7 +56,6 @@ export default function TodoListData() {
           </ul>
         </section>
       )}
-
 
       <Pagination
         page={pagination._page}

@@ -137,10 +137,9 @@ server.use((req, res, next) => {
     //(PUT, PATCH, DELETE)Check quyền sở hữu
     if (['PUT', 'PATCH', 'DELETE'].includes(req.method)) {
       const parts = req.path.split('/');
-      const todoId = parseInt(parts[parts.length - 1]); // Lấy ID từ URL
+      const todoId = parseInt(parts[parts.length - 1]);
       if (!isNaN(todoId)) {
         const todo = router.db.get('todos').find({ id: todoId }).value();
-        // Nếu todo tồn tại và userId không khớp
         if (todo && todo.userId !== user.id) {
           return res.status(403).jsonp({ error: "Bạn không được phép sửa/xóa Todo của người khác!" });
         }
@@ -148,7 +147,27 @@ server.use((req, res, next) => {
     }
   }
 
-  next(); // Cho phép đi tiếp vào router mặc định của json-server
+  next();
+});
+
+server.use((req, res, next) => {
+  if (req.path.startsWith('/users')) {
+    const user = getUserFromCookie(req);
+    if (!user) {
+      return res.status(401).jsonp({ error: "Vui lòng đăng nhập" });
+    }
+    if ((req.method === 'DELETE' || req.method === 'GET') && user.role !== 'ADMIN') {
+       return res.status(403).jsonp({ error: "Chỉ Admin mới có quyền này!" });
+    }
+    if (req.method === 'DELETE') {
+       const parts = req.path.split('/');
+       const deleteId = parts[parts.length - 1];
+       if (deleteId == user.id) {
+           return res.status(400).jsonp({ error: "Không thể tự xóa chính mình!" });
+       }
+    }
+  }
+  next();
 });
 
 server.use(router);

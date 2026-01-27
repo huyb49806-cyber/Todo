@@ -6,7 +6,7 @@ const initialState = {
   pagination:{
     _page: 1,
     _limit: 5,
-    _total:0
+    _totalRows:0
   },
   error: null
 };
@@ -17,9 +17,9 @@ export default function todosReducer(state = initialState, action) {
       return {
         ...state,
         items: action.payload.data,
-        panigation:{
+        pagination:{
           ...state.pagination,
-          ...state.payload.pagination
+          ...action.payload.pagination
         }
       };
 

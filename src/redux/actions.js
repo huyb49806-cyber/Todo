@@ -11,7 +11,6 @@ const check_auth_url = 'http://localhost:8000/check-auth';
 const api_url='http://localhost:8000/todos';
 
 export const register =(user,nav)=>async(dispatch)=>{
-  dispatch({type:types.REGISTER_REQUEST});
   try{
     await axios.post(register_api_url,user)
     alert("dag ki tcong! Vui long dn");
@@ -159,7 +158,7 @@ export const setPage = (page) => {
       type: types.SET_PAGE,
       payload: page
     })
-    return await dispatch(fetchData);
+    return await dispatch(fetchData());
   }
 };
 
@@ -182,10 +181,10 @@ export const checkAuth = () => {
     }
 }
 
-export const login = (username, password, navigate) => {
+export const login = (email, password, navigate) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(login_api_url, {email: username, password });
+      const response = await axios.post(login_api_url, {email: email, password });
       dispatch({
         type: types.LOGIN_SUCCESS,
         payload: response.data 
@@ -197,6 +196,7 @@ export const login = (username, password, navigate) => {
         type: types.LOGIN_FAILURE,
         payload: "Sai tên đăng nhập hoặc mật khẩu"
       });
+      throw error;
     }
   };
 };
