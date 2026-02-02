@@ -37,12 +37,6 @@
     {
       "id": "1768622190300",
       "text": "adddd",
-      "completed": true,
-      "userId": "1"
-    },
-    {
-      "id": "1768622250124",
-      "text": "bhthm",
       "completed": false,
       "userId": "1"
     },
@@ -63,78 +57,6 @@
       "text": "double submissions",
       "completed": true,
       "userId": "1"
-    },
-    {
-      "id": "1768637967155",
-      "text": "Thực hành Axios với API giả",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768638455237",
-      "text": "Học tập và làm việc",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768641982161",
-      "text": "đi ngủ",
-      "completed": true,
-      "userId": "2"
-    },
-    {
-      "id": "1768642009460",
-      "text": "thức dậy",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768642350886",
-      "text": "12345",
-      "completed": true,
-      "userId": "2"
-    },
-    {
-      "id": "1768642360666",
-      "text": "678910",
-      "completed": true,
-      "userId": "2"
-    },
-    {
-      "id": "1768642381067",
-      "text": "12345678910",
-      "completed": true,
-      "userId": "2"
-    },
-    {
-      "id": "1768706063191",
-      "text": "hojc bai",
-      "completed": true,
-      "userId": "2"
-    },
-    {
-      "id": "1768706073519",
-      "text": "hoc baiiii",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768706080043",
-      "text": "dskudihlsj",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768716764697",
-      "text": "ngủ",
-      "completed": false,
-      "userId": "2"
-    },
-    {
-      "id": "1768994856709",
-      "text": "go out",
-      "completed": false,
-      "userId": "2"
     },
     {
       "id": "1769509958827",
@@ -163,6 +85,62 @@
       "completed": false,
       "userId": 1769509933007,
       "createdAt": "2026-01-27T10:38:57.582Z"
+    },
+    {
+      "id": "1769521114551",
+      "text": "drggv",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-01-27T13:38:34.583Z"
+    },
+    {
+      "id": "1769522100255",
+      "text": "hoc bai",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2026-01-27T13:55:00.279Z"
+    },
+    {
+      "id": "1769522418478",
+      "text": "di ngu",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2026-01-27T14:00:18.515Z"
+    },
+    {
+      "id": "1769523540022",
+      "text": "123456",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2026-01-27T14:19:00.055Z"
+    },
+    {
+      "id": "1770034659734",
+      "text": "cong viec",
+      "completed": false,
+      "userId": "1",
+      "createdAt": "2026-02-02T12:17:39.810Z"
+    },
+    {
+      "id": "1770035306294",
+      "text": "cong viec 1",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-02-02T12:28:26.323Z"
+    },
+    {
+      "id": "1770035312588",
+      "text": "cong viec 1",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-02-02T12:28:32.622Z"
+    },
+    {
+      "id": "1770035540993",
+      "text": "cong viec 2",
+      "completed": false,
+      "userId": 1769509933007,
+      "createdAt": "2026-02-02T12:32:21.015Z"
     }
   ]
 }

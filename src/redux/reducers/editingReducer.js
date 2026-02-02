@@ -1,15 +1,21 @@
 import * as types from '../constants';
 
-const initialState = {
+const initialState={
   editingId: null
 };
 
-export default function editingReducer(state = initialState, action) {
+export default function editingReducer(state = initialState, action){
   switch (action.type) {
     case types.SET_EDITING_ID:
-      return { ...state, editingId: action.payload };
-    case types.CLEAR_EDITING_ID:
-      return { ...state, editingId: null };
+      return{ 
+        ...state,
+        editingId: action.payload
+      };
+    case types.CANCEL_EDITING:
+      return{
+        ...state,
+        editingId: null 
+      };
     default:
       return state;
   }

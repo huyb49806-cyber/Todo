@@ -14,7 +14,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
-  
+  res.header('Access-Control-Expose-Headers', 'X-Total-Count');
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -25,7 +25,7 @@ server.use((req, res, next) => {
 const getUserFromCookie = (req) => {
   const cookieHeader = req.headers.cookie;
   if (!cookieHeader) return null;
-
+  //chuyển chuỗi cookie thành object
   const cookies = {};
   cookieHeader.split(';').forEach(cookie => {
     const parts = cookie.split('=');
@@ -45,12 +45,12 @@ const getUserFromCookie = (req) => {
 
 
 // Đăng ký (Register)
-server.post('/register', (req, res) => {
+server.post('/register', (req, res) => {//ser ver lắng nghe yêu cầu gửi đến đường dẫn /register với phương thức POST
   const { email, password, name } = req.body;
   const db = router.db;
   const existingUser = db.get('users').find({ email }).value();
   if (existingUser) {
-    return res.status(400).jsonp({ error: "Email này đã được sử dụng" });
+    return res.status(400).jsonp({ error: "Email này đã được sử dụng" });//lỗi bad request
   }
 
   const newUser = {
@@ -61,7 +61,7 @@ server.post('/register', (req, res) => {
     role: "USER"
   };
 
-  db.get('users').push(newUser).write();
+  db.get('users').push(newUser).write();//đưa user vào trong users:[]
   res.status(201).jsonp({ message: "Đăng ký thành công", user: { id: newUser.id, email: newUser.email, name: newUser.name } });
 });
 
@@ -69,19 +69,16 @@ server.post('/register', (req, res) => {
 server.post('/login', (req, res) => {
   const { email, password } = req.body;
   const db = router.db;
-  
   const user = db.get('users').find({ email, password }).value();
-
   if (user) {
-    // Set HttpOnly Cookie
-    res.cookie('auth_token', JSON.stringify(user), {
+    res.cookie('auth_token', 
+      JSON.stringify(user), 
+      {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       path: '/',
       sameSite: 'Lax'
     });
-
-    // Trả về info (trừ password)
     res.jsonp({
       id: user.id,
       name: user.name,
@@ -114,11 +111,10 @@ server.post('/logout', (req, res) => {
   res.jsonp({ message: "Đã đăng xuất" });
 });
 
-//AUTHORIZATION
-// Middleware chặn mọi request xuống DB để kiểm tra quyền
+//authorization
 server.use((req, res, next) => {
   if (['/login', '/register', '/check-auth', '/logout'].includes(req.path)) {
-    return next();
+    return next();//truy cập các url trên thì bỏ qua k ktra đăng nhập
   }
   const user = getUserFromCookie(req);
     if (!user) {
@@ -134,7 +130,7 @@ server.use((req, res, next) => {
     if (req.method === 'GET') {
       req.query.userId = user.id.toString(); 
     }
-    //(PUT, PATCH, DELETE)Check quyền sở hữu
+    //(PUT, PATCH, DELETE)Chặn xóa id todo của người khác
     if (['PUT', 'PATCH', 'DELETE'].includes(req.method)) {
       const parts = req.path.split('/');
       const todoId = parseInt(parts[parts.length - 1]);

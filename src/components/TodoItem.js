@@ -8,11 +8,21 @@ function TodoItem({ todo, isEditingItem }) {
   const navigate = useNavigate();
 
   const handleToggle = () => {
-    dispatch(toggleTodo(todo.id, todo.completed));
+    dispatch(toggleTodo(todo.id, todo.completed))
+    .then()
+    .catch((error)=>{
+      alert('lỗi xóa');
+    })
   };
-  const handleDelete = () => {
-    dispatch(deleteTodo(todo.id));
-  };
+
+  const handleDelete=()=>{
+    dispatch(deleteTodo(todo.id))
+    .then()
+    .catch((error)=>{
+      alert('lỗi xóa do ',error.message);
+    })
+  }
+
   const handleEdit = () => {
     dispatch(setEditingId(todo.id));
     navigate(`/edit/${todo.id}`);

@@ -29,15 +29,15 @@ export default function TodoListData() {
   }, [dispatch]);
   useEffect(() => {
     loadData();
-  }, [pagination?._page,filter,loadData]);
+  }, [pagination?._page,filter,loadData]);//khi data lớn thì lọc, sort, phân trang phải do bên server đảm nhận
   const activeCount = items.filter(t => !t.completed).length;
   const completedCount = items.length - activeCount;
 
   const handlePageChange = useCallback((f) => {
     dispatch(setPage(f));
-  }, [dispatch]);
-  const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), [dispatch]);
-  const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), [dispatch]);
+  }, []);
+  const handleFilterChange = useCallback((f) => dispatch(setFilter(f)), []);
+  const handleClearCompleted = useCallback(() => dispatch(clearCompleted()), []);
 
   return (
     <div>

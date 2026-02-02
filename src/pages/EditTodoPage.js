@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
-import { saveEditTodo, clearEditingId, setEditingId } from '../redux/actions';
+import React, {useState,useEffect} from 'react';
+import {useSelector,useDispatch} from 'react-redux';
+import {useParams,useNavigate} from 'react-router-dom';
+import { saveEditing, cancelEditing, setEditingId } from '../redux/actions';
 import { selectEditingTodo } from '../redux/selectors';
 
 export default function EditTodoPage() {
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const {id} = useParams();
+  const dispatch= useDispatch();
   const navigate = useNavigate();
-
-  // const params = useParams();
-  // console.log('1. URL Params object:', params);
+  // console.log('URL Params:', id);
 
   useEffect(() => {
     dispatch(setEditingId(id));
-    return () => dispatch(clearEditingId());
+    return () => dispatch(cancelEditing());
   }, [id, dispatch]);
 
   const todo = useSelector(selectEditingTodo);
-  const [text, setText] = useState('');
+  const [text,setText]=useState('');
 
   useEffect(() => {
     setText(todo.text);
   }, [todo]);
 
-  const handleSave = (e) => {
+  const handleSave=(e)=>{
     e.preventDefault();
-    if (text.trim()) {
-      dispatch(saveEditTodo(todo.id, text.trim()));
+    if (text.trim()){
+      dispatch(saveEditing(text.trim(),todo.id));
       navigate('/');
     }
   };
