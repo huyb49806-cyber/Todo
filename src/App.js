@@ -12,18 +12,18 @@ import RegisterPage from './pages/RegisterPage';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useSelector(state => state.auth);
+  const {isAuthenticated} = useSelector(state => state.auth);
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
-function AppContent() {
+function AppContent(){
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector(state => state.auth);
+  const { isAuthenticated } = useSelector(state => state.auth);
   useEffect(() => {
     dispatch(checkAuth());
-  }, [dispatch])
+  }, [])
   const go = () => {
     navigate("/add");
   };

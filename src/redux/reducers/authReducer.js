@@ -1,33 +1,29 @@
 import * as types from '../constants';
 
-const initialState = {
-  user: null,    
+const initialState={
   isAuthenticated: false,
-  error: null
+  user: null
+  
 };
 
-const authReducer = (state = initialState, action) => {
-  switch (action.type) {
+const authReducer=(state=initialState,action)=>{
+  switch (action.type){
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload,
-        error: null
+        user: action.payload
       };
     case types.LOGIN_FAILURE:
-      return {
+      return{
         ...state,
         isAuthenticated: false,
-        user: null,
-        error: action.payload
       };
     case types.LOGOUT:
-      return {
+      return{
         ...state,
         isAuthenticated: false,
-        user: null,
-        error: null
+        user: null
       };
     default:
       return state;

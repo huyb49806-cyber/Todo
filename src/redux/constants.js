@@ -14,9 +14,6 @@ export const SET_EDITING_ID='editing/setEditing';
 export const SAVE_EDITING='editing/saveEditing';
 export const CANCEL_EDITING='editing/cancelEditing';
 
-export const REGISTER_SUCCESS = 'register/success';
-export const REGISTER_FAILURE = 'register/failure';
-
 export const ADMIN_GET_USER='admin/getUser'
 export const ADMIN_DELETE_USER='admin/deleteUser'
 

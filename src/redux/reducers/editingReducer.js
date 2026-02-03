@@ -16,6 +16,7 @@ export default function editingReducer(state = initialState, action){
         ...state,
         editingId: null 
       };
+    
     default:
       return state;
   }

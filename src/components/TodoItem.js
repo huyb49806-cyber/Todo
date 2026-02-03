@@ -19,7 +19,7 @@ function TodoItem({ todo, isEditingItem }) {
     dispatch(deleteTodo(todo.id))
     .then()
     .catch((error)=>{
-      alert('lỗi xóa do ',error.message);
+      alert('lỗi xóa do '+error.message);
     })
   }
 

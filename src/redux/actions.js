@@ -97,7 +97,7 @@ export const deleteTodo=(id)=>{
     try{
       await axios.delete(`${api_url}/${id}`);
     }catch(error){
-      console.log('lỗi xóa');
+      console.error('lỗi xóa');
       throw error;
     }
   }
@@ -153,67 +153,67 @@ export const clearCompleted = () => ({
   type: types.CLEAR_COMPLETED
 });
 
-export const checkAuth = () => {
-    return async (dispatch) => {
-        try {
-            const response = await axios.get(check_auth_url);
-            dispatch({
-                type: types.LOGIN_SUCCESS,
-                payload: response.data
-            });
-            return response.data;
-        } catch (error) {
-            dispatch({
-                type: types.LOGIN_FAILURE,
-                payload: null 
-            });
-            throw error;
-        }
-    }
-}
 
-export const login = (email, password, navigate) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(login_api_url, {email: email, password });
+export const login=(email,password,navigate)=>{
+  return async (dispatch)=>{
+    try{
+      const response = await axios.post(login_api_url,{email,password});
+      // console.log(response);
       dispatch({
         type: types.LOGIN_SUCCESS,
-        payload: response.data 
+        payload: response.data
       });
       if (navigate) navigate('/');
       return response.data;
-    } catch (error){
+    }catch(error){
       dispatch({
         type: types.LOGIN_FAILURE,
-        payload: "Sai tên đăng nhập hoặc mật khẩu"
       });
+      alert("đăng nhập thất bại");
       throw error;
     }
   };
 };
 
-export const logout = () => {
-  return async (dispatch) => {
-    try {
-        await axios.post(logout_api_url); 
-        
+export const logout=()=>{
+  return async (dispatch)=>{
+    try{
+      await axios.post(logout_api_url); 
         dispatch({ type: types.LOGOUT });
-    } catch (e) {
-        console.error("Lỗi logout", e);
+    }catch(e){
+        console.error("Lỗi logout");
     }
   };
 };
+
+export const checkAuth=()=>{
+  return async (dispatch)=>{
+    try{
+      const response=await axios.get(check_auth_url);
+      // console.log(response);
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: response.data
+      })
+      return response.data;
+    }catch(error){
+      dispatch({
+        type: types.LOGIN_FAILURE
+      })
+    }
+  }
+}
 
 export const getallUsers=()=>async(dispatch)=>{
   try{
     const response=await axios.get(users_api_url);
     // console.log(response);
     dispatch({
-      type: 'types.ADMIN_GET_USER',
+      type: types.ADMIN_GET_USER,
       payload: response.data
     });
-  }catch(error){
-    alert("không phải admin")
+  }catch{
+    
   }
 };
 
@@ -221,7 +221,7 @@ export const deleteUser=(userId)=>async(dispatch)=>{
   try{
     await axios.delete(`${users_api_url}/${userId}`);
     dispatch({
-      type:'types.ADMIN_DELETE_USER',
+      type: types.ADMIN_DELETE_USER,
       payload: userId
     })
   }catch{
@@ -229,13 +229,12 @@ export const deleteUser=(userId)=>async(dispatch)=>{
   }
 }
 
-export const register =(user,nav)=>async(dispatch)=>{
+export const register=(user,nav)=>async ()=>{
   try{
     await axios.post(register_api_url,user)
-    alert("dag ki tcong! Vui long dn");
+    alert("Đăng kí thành công");
     nav('/login');
-    dispatch({type:types.REGISTER_SUCCESS});
   }catch(err){
-    alert(err.response?.data?.error||"dki tbai")
+    alert(err.response?.data?.error||"đăng kí thất bại")
   }
 }

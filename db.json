@@ -6,22 +6,9 @@
       "password": "123",
       "name": "HuyAdmin",
       "role": "ADMIN"
-    },
-    {
-      "id": 1769509933007,
-      "email": "huybui27100@gmail.com",
-      "password": "Huy27102006",
-      "name": "Huy",
-      "role": "USER"
     }
   ],
   "todos": [
-    {
-      "id": "1768396624847",
-      "text": "Hoc tap",
-      "completed": false,
-      "userId": "1"
-    },
     {
       "id": "1768396647854",
       "text": "hoc tap",
@@ -59,53 +46,11 @@
       "userId": "1"
     },
     {
-      "id": "1769509958827",
-      "text": "svsdv",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-01-27T10:32:38.838Z"
-    },
-    {
-      "id": "1769509962185",
-      "text": "sdvsbfbfg",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-01-27T10:32:42.194Z"
-    },
-    {
-      "id": "1769510259846",
-      "text": "bdbth",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-01-27T10:37:39.876Z"
-    },
-    {
-      "id": "1769510337552",
-      "text": "sgsstyhjhk",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-01-27T10:38:57.582Z"
-    },
-    {
-      "id": "1769521114551",
-      "text": "drggv",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-01-27T13:38:34.583Z"
-    },
-    {
       "id": "1769522100255",
       "text": "hoc bai",
       "completed": false,
       "userId": "1",
       "createdAt": "2026-01-27T13:55:00.279Z"
-    },
-    {
-      "id": "1769522418478",
-      "text": "di ngu",
-      "completed": false,
-      "userId": "1",
-      "createdAt": "2026-01-27T14:00:18.515Z"
     },
     {
       "id": "1769523540022",
@@ -115,32 +60,18 @@
       "createdAt": "2026-01-27T14:19:00.055Z"
     },
     {
-      "id": "1770034659734",
+      "id": "1770093249710",
       "text": "cong viec",
       "completed": false,
       "userId": "1",
-      "createdAt": "2026-02-02T12:17:39.810Z"
+      "createdAt": "2026-02-03T04:34:09.737Z"
     },
     {
-      "id": "1770035306294",
-      "text": "cong viec 1",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-02-02T12:28:26.323Z"
-    },
-    {
-      "id": "1770035312588",
-      "text": "cong viec 1",
-      "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-02-02T12:28:32.622Z"
-    },
-    {
-      "id": "1770035540993",
+      "id": "1770093268757",
       "text": "cong viec 2",
       "completed": false,
-      "userId": 1769509933007,
-      "createdAt": "2026-02-02T12:32:21.015Z"
+      "userId": "1",
+      "createdAt": "2026-02-03T04:34:28.779Z"
     }
   ]
 }
