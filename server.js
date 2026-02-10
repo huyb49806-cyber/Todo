@@ -8,8 +8,8 @@ const FRONTEND_ORIGIN = 'http://localhost:3000';
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// 1. Cấu hình CORS & Headers (Để cookie hoạt động)
-server.use((req, res, next) => {
+// Cấu hình CORS & Headers (Để cookie hoạt động)
+server.use((req, res, next) =>{
   res.header('Access-Control-Allow-Origin', FRONTEND_ORIGIN);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');

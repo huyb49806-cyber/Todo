@@ -11,16 +11,13 @@ const check_auth_url = 'http://localhost:8000/check-auth';
 const api_url='http://localhost:8000/todos';
 
 
-export const fetchData=()=>{
+export const fetchData=(page=1)=>{
   return async(dispatch,getState)=>{
     try{
-      const {pagination}=getState().todos;
+      const {items,pagination}=getState().todos;
       const filter=getState().filter;
-      // console.log(filter);
-      // console.log(pagination);
+      const currentMaxId=items.length>0?Math.max(...items.map(t=>parseInt(t.id))):0;
       const params={
-        _page: pagination._page,
-        _limit: pagination._limit,
         _sort: 'id',
         _order: 'desc',
       }
@@ -32,19 +29,29 @@ export const fetchData=()=>{
           params.completed= true;
           break;
       }
+
+      let isSyncMode=false;
+
+      if(page===1&&currentMaxId>0){
+        params.id_gt=currentMaxId;
+        isSyncMode=true;
+      }
+      else{
+        params._page=page;
+        params._limit=pagination._limit;
+      }
       const response=await axios.get(api_url,{params});
-      // console.log(response);
-      // console.log(response.headers['x-total-count']);
+      if(isSyncMode&&response.data.length===0) return;
       const totalRows=response.headers['x-total-count'];
       dispatch({
         type: types.FETCH_TODOS_SUCCESS,
         payload:{
           data: response.data,
-          pagination:{
+          pagination:!isSyncMode?{
             _totalRows: parseInt(totalRows),
             _page: pagination._page,
             _limit: pagination._limit
-          }
+          }:{_page:1}
         }
       });
       return response.data;

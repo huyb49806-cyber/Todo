@@ -12,11 +12,24 @@ const initialState = {
 };
 
 export default function todosReducer(state = initialState, action) {
-  switch (action.type) {
+  switch (action.type){
     case types.FETCH_TODOS_SUCCESS:
+      const newItems=action.payload.data;
+      const curItems=state.todos;
+      const Map=new Map(curItems.map(item=>[item.id,item]));
+
+      newItems.forEach(newItem=>{
+        if(Map.has(newItem.id)){
+          const existingItem=Map.get(newItem.id);
+          Map.set(newItem.id,{...existingItem,...newItem});
+        }
+        else{
+          Map.set(newItem.id,newItem);
+        }
+      })
       return{
-        ...state,//state ở mỗi nhánh reducer chỉ là 1 phần do reducer đó quản lí, kp cả state trong store
-        items: action.payload.data,
+        ...state,
+        items: Array.from(Map.value()),
         pagination:{
           ...state.pagination,
           ...action.payload.pagination
